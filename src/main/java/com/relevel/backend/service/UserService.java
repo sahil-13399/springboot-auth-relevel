@@ -13,8 +13,11 @@ public class UserService {
 
 
   public String registerUser(User user) {
-
+  try {
     userRepository.save(user);
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
 
     return "Successful";
   }

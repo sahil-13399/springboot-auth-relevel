@@ -25,7 +25,7 @@ public class UserController {
   @PostMapping(USER_ENDPOINT + REGISTER_ENDPOINT)
   public ResponseEntity postRegisterUser(@RequestBody User user) {
     userService.registerUser(user);
-    return null;
+    return ResponseEntity.ok("Successful");
   }
 
 
