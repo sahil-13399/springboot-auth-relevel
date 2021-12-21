@@ -35,4 +35,10 @@ public class UserService implements UserDetailsService {
     return new org.springframework.security.core.userdetails.User(user.getEmail(),
         user.getPassword(), new ArrayList<>());
   }
+
+  public User findUserByName(String name) {
+    User user = userRepository.findByName(name);
+    return user;
+  }
+
 }

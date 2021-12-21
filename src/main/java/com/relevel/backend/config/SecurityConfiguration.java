@@ -43,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .permitAll()
         .antMatchers("/api/users/login")
         .permitAll()
-        .antMatchers("/h2-ui")
+        .antMatchers("/h2-ui/**")
         .permitAll()
         .anyRequest()
         .authenticated()
@@ -51,6 +51,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
+    http.headers().frameOptions().sameOrigin();
   }
 }
