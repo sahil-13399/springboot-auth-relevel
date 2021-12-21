@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Component
-class JWTUtility implements Serializable {
+public class JWTUtility implements Serializable {
 
   private static final long serialVersionUID = 234234523523L;
 
