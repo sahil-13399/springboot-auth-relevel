@@ -1,10 +1,14 @@
 package com.relevel.backend.dto;
 
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -21,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 public class User {
 
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Id
   private Long id;
   @NotBlank
@@ -38,5 +42,9 @@ public class User {
   private String gender;
   @NotBlank
   private String address;
+
+  @OneToMany(cascade = CascadeType.ALL)
+  @JoinColumn(name = "user_id")
+  private List<Book> books;
 
 }
