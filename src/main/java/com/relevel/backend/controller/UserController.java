@@ -13,6 +13,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,12 +36,17 @@ public class UserController {
   @Autowired
   private AuthenticationManager authenticationManager;
 
+  @Autowired
+  private PasswordEncoder bCryptPasswordEncoder;
+
   public UserController(UserService userService) {
     this.userService = userService;
   }
 
   @PostMapping(USER_ENDPOINT + REGISTER_ENDPOINT)
   public ResponseEntity postRegisterUser(@RequestBody User user) {
+    String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
+    user.setPassword(encodedPassword);
     userService.registerUser(user);
     return ResponseEntity.ok("Successful");
   }
